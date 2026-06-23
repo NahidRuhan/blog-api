@@ -3,6 +3,9 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import config from "./config";
 import { prisma } from "./lib/prisma";
+import httpStatus from "http-status";
+import bcrypt from "bcryptjs";
+import { userRoutes } from "./modules/users/user.route";
 
 const app: Application = express();
 app.use(cors({
@@ -18,5 +21,7 @@ app.get("/", async(req: Request, res: Response) => {
     console.log(user)
     res.send("Hello World!");
 })
+
+app.use("/api/users",userRoutes)
 
 export default app;
