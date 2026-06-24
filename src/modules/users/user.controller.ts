@@ -7,6 +7,7 @@ import { sendResponse } from "../../utils/sendResponse";
 const registerUser = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const payload = req.body;
+
     const user = await userService.registerUserIntoDB(payload);
 
     sendResponse(res, {
@@ -18,6 +19,45 @@ const registerUser = catchAsync(
   },
 );
 
+const getMyProfile = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+
+    const profile = await userService.getMyProfileFromDB(
+      req.user?.id as string,
+    );
+
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "User profile fetched successfully",
+      data: { profile },
+    });
+  },
+);
+
+const updateMyProfile = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+
+    const userId = req.user?.id as string;
+
+    const payload = req.body;
+    
+    const updatedUser = await userService.updateMyProfileIntoDB(
+      userId,
+      payload,
+    );
+
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "User profile updated successfully",
+      data: { updatedUser },
+    });
+  },
+);
+
 export const userController = {
   registerUser,
+  getMyProfile,
+  updateMyProfile,
 };
