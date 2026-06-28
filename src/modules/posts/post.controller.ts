@@ -18,6 +18,20 @@ const getAllPost = catchAsync(async (req: Request, res: Response, next: NextFunc
 })
 
 const getPostById = catchAsync(async (req: Request, res: Response, next: NextFunction) =>{
+  const postId = req.params.postId
+
+  if(!postId){
+    throw new Error('PostId is required params')
+  }
+
+  const result = await postService.getPostByIdFromDB(postId as string)
+
+  sendResponse(res,{
+    success:true,
+    statusCode:httpStatus.OK,
+    message:"Post fetched successfully",
+    data:result
+  })
 
 })
 
@@ -26,6 +40,20 @@ const getPostStats = catchAsync(async (req: Request, res: Response, next: NextFu
 })
 
 const getMyPosts = catchAsync(async (req: Request, res: Response, next: NextFunction) =>{
+  const authorId = req.user?.id as string
+
+  if(!authorId){
+    throw new Error('User not found')
+  }
+
+  const result = await postService.getMyPostsFromDB(authorId)
+
+  sendResponse(res,{
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "My posts fetched successfully",
+    data: result
+  })
 
 })
 
@@ -45,10 +73,43 @@ const createPost = catchAsync(async (req: Request, res: Response, next: NextFunc
 
 const updatePost = catchAsync(async (req: Request, res: Response, next: NextFunction) =>{
 
+  const authorId = req.user?.id as string
+  const isAdmin = req.user?.role === "ADMIN"
+  const postId = req.params.postId as string
+  const payload = req.body
+
+  if(!postId){
+    throw new Error('PostId is required params')
+  }
+
+  const result = await postService.updatePostIntoDB(postId, payload,authorId,isAdmin)
+
+  sendResponse(res,{
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Post updated successfully",
+    data: result
+  })
+
 })
 
 const deletePost = catchAsync(async (req: Request, res: Response, next: NextFunction) =>{
+  const isAdmin = req.user?.role === "ADMIN"
+  const postId = req.params.postId as string
+  const authorId = req.user?.id as string
 
+  if(!postId){
+    throw new Error('PostId is required params')
+  }
+
+  await postService.deletePostFromDB(postId,authorId,isAdmin)
+
+  sendResponse(res,{
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Post deleted successfully",
+    data: null
+  })
 })
 
 export const postController = {
