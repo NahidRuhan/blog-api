@@ -1,3 +1,4 @@
+import { CommentStatus, PostStatus } from "../../../generated/prisma/enums";
 import { prisma } from "../../lib/prisma";
 import { ICreatePostPayLoad, IUpdatePostPayLoad } from "./post.interface";
 
@@ -17,20 +18,24 @@ const getAllPostFromDB = async () => {
 };
 
 const getPostByIdFromDB = async (postId: string) => {
-  const post = await prisma.post.findUniqueOrThrow({
-    where: {
-      id: postId,
-    },
-  });
 
-  const updatedPost = await prisma.post.update({
+  const transactionResult = await prisma.$transaction(async (tx) => {
+    await tx.post.update({
+      where: {
+        id: postId,
+      },
+      data: {
+        views: {
+          increment: 1,
+        },
+      },
+    });
+
+    // throw new Error("FaKE ERROR")
+
+    const post = await tx.post.findUniqueOrThrow({
     where: {
       id: postId,
-    },
-    data: {
-      views: {
-        increment: 1,
-      },
     },
     include: {
       author: {
@@ -38,14 +43,93 @@ const getPostByIdFromDB = async (postId: string) => {
           password: true,
         },
       },
-      comments: true,
+      comments: {
+        where: {
+          status : CommentStatus.APPROVED
+        },
+        orderBy: {
+          createdAt: "desc"
+        }
+      },
+      _count: {
+        select: {
+          comments: true
+        }
+      }
     },
   });
 
-  return updatedPost;
+  return post
+
+  });
+  
+  return transactionResult
 };
 
-const getPostStatsFromDB = async () => {};
+const getPostStatsFromDB = async () => {
+    const transactionResult = await prisma.$transaction(
+        async (tx) => {
+
+            const [
+                totalPosts,
+                totalPublishedPosts,
+                totalDraftPosts,
+                totalArchivedPosts,
+                totalComments,
+                totalApprovedComments,
+                totalRejectedComments,
+                totalPostViewsAggregate
+            ] = await Promise.all([
+                await tx.post.count(),
+                await tx.post.count({
+                    where: {
+                        status: PostStatus.PUBLISHED
+                    }
+                }),
+                await tx.post.count({
+                    where: {
+                        status: PostStatus.DRAFT
+                    }
+                }),
+                await tx.post.count({
+                    where: {
+                        status: PostStatus.ARCHIVED
+                    }
+                }),
+                await tx.comment.count(),
+                await tx.comment.count({
+                    where: {
+                        status: CommentStatus.APPROVED
+                    }
+                }),
+                await tx.comment.count({
+                    where: {
+                        status: CommentStatus.REJECT
+                    }
+                }),
+                await tx.post.aggregate({
+                    _sum: {
+                        views: true
+                    }
+                })
+            ]);
+
+
+            return {
+                totalPosts,
+                totalPublishedPosts,
+                totalDraftPosts,
+                totalArchivedPosts,
+                totalComments,
+                totalApprovedComments,
+                totalRejectedComments,
+                totalPostViews : totalPostViewsAggregate._sum.views
+            }
+        }
+    );
+
+    return transactionResult
+}
 
 const getMyPostsFromDB = async (authorId: string) => {
   const result = await prisma.post.findMany({
@@ -127,11 +211,10 @@ const deletePostFromDB = async (
     throw new Error("You are not authorized to update this post");
   }
   await prisma.post.delete({
-    where:{
-      id:postId
-    }
-  })
-
+    where: {
+      id: postId,
+    },
+  });
 };
 
 export const postService = {
