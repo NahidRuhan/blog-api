@@ -8,7 +8,8 @@
     "start": "node dist/server.js",
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "stripe:webhook": "stripe listen --forward-to localhost:8000/api/subscription/webhook"
+    "stripe:webhook": "stripe listen --forward-to localhost:8000/api/subscription/webhook",
+    "postinstall": "prisma generate"
   },
   "keywords": [],
   "author": "",
