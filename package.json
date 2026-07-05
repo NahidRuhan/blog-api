@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "start": "node dist/server.js",
-    "build": "tsc",
+    "build": "tsup",
     "test": "echo \"Error: no test specified\" && exit 1",
     "stripe:webhook": "stripe listen --forward-to localhost:8000/api/subscription/webhook",
     "postinstall": "prisma generate"
@@ -19,6 +19,7 @@
     "@types/node": "^26.0.0",
     "@types/pg": "^8.20.0",
     "prisma": "^7.8.0",
+    "tsup": "^8.5.1",
     "tsx": "^4.22.4",
     "typescript": "^6.0.3"
   },
