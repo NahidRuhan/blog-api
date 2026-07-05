@@ -77,6 +77,10 @@ const getAllPostFromDB = async (query: IPostQuery) => {
     });
   }
 
+  andConditions.push({
+    isPremium: false,
+  });
+
   const posts = await prisma.post.findMany({
     // filtering / exact match without AND Operator
 
@@ -296,6 +300,7 @@ const getPostByIdFromDB = async (postId: string) => {
     const post = await tx.post.findUniqueOrThrow({
       where: {
         id: postId,
+        isPremium: false,
       },
       include: {
         author: {
@@ -416,6 +421,17 @@ const createPostIntoDB = async (
   payLoad: ICreatePostPayLoad,
   userId: string,
 ) => {
+  const user = await prisma.user.findUniqueOrThrow({
+    where: {
+      id: userId,
+    },
+    include: {
+      subscription: true
+    }
+  });
+  if(payLoad.isPremium && user.subscription?.status !== "ACTIVE") {
+    throw new Error("You are not authorized to create a premium post");
+  }
   const result = await prisma.post.create({
     data: {
       ...payLoad,

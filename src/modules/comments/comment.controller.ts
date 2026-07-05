@@ -15,9 +15,9 @@ const getCommentByAuthor = catchAsync(async (req: Request, res: Response, next: 
     })
 })
 
-const getSingleComment = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+const getCommentByPostId = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
       const { postId } = req.params
-    const result = await commentService.getSingleCommentFromDB(postId as string)
+    const result = await commentService.getCommentByPostIdFromDB(postId as string)
     sendResponse(res, {
         success: true,
         statusCode: httpStatus.OK,
@@ -78,7 +78,7 @@ const changeCommentStatus = catchAsync(async (req: Request, res: Response, next:
 
 export const commentController = {
   getCommentByAuthor,
-  getSingleComment,
+  getCommentByPostId,
   createComment,
   updateComment,
   deleteComment,

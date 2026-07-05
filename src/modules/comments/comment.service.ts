@@ -39,7 +39,7 @@ const getCommentByAuthorFromDB = async (authorId: string) => {
     return comments
 }
 
-const getSingleCommentFromDB = async (postId : string) => {
+const getCommentByPostIdFromDB = async (postId : string) => {
     const comment = await prisma.comment.findMany({
         where: {
             postId
@@ -124,7 +124,7 @@ const changeCommentStatusFromDB = async (id: string, data: IModerateCommentPaylo
 }
 export const commentService = {
   getCommentByAuthorFromDB,
-  getSingleCommentFromDB,
+  getCommentByPostIdFromDB,
   createCommentFromDB,
   updateCommentFromDB,
   deleteCommentFromDB,

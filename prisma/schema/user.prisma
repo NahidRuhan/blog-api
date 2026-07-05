@@ -6,6 +6,7 @@ model User {
   activeStatus ActiveStatus @default(ACTIVE)
   role         Role         @default(USER)
   profile      Profile?
+  subscription Subscription?
   posts        Post[]
   comments     Comment[]
   createdAt    DateTime     @default(now())

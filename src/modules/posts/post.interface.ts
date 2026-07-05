@@ -6,6 +6,7 @@ export interface ICreatePostPayLoad {
   content: string;
   thumbnail?: string;
   isFeatured?: boolean;
+  isPremium?: boolean;
   status?: PostStatus;
   tags: string[];
 }
