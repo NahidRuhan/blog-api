@@ -26,10 +26,20 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.get("/", async (req: Request, res: Response) => {
-  const user = await prisma.user.findMany();
-  console.log(user);
-  res.send("Hello World!");
+app.get("/", (req: Request, res: Response) => {
+  res.status(200).json({
+    success: true,
+    message: "Welcome to the Blog API",
+    version: "1.0.0",
+    endpoints: {
+      users: "/api/users",
+      auth: "/api/auth",
+      posts: "/api/posts",
+      comments: "/api/comments",
+      subscription: "/api/subscription",
+      premium: "/api/premium"
+    }
+  });
 });
 
 app.use("/api/users", userRoutes);
