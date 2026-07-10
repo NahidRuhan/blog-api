@@ -1,8 +1,6 @@
-import Stripe from "stripe";
 import config from "../../config";
 import { prisma } from "../../lib/prisma";
 import { stripe } from "../../lib/stripe";
-import { SubscriptionStatus } from "../../../generated/prisma/enums";
 import { handleChangeSubscription, handleCheckoutCompleted } from "./subscription.utils";
 
 const createCheckoutSession = async (userId: string) => {

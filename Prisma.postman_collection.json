@@ -1,0 +1,472 @@
+{
+  "info": {
+    "_postman_id": "548f45f6-2c9e-4f26-8507-9313a4e36b67",
+    "name": "Prisma",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "55132723",
+    "_collection_link": "https://go.postman.co/collection/55132723-548f45f6-2c9e-4f26-8507-9313a4e36b67?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "// {\r\n//     \"name\": \"Ruhan\",\r\n//     \"email\": \"nahidruhan@gmail.com\",\r\n//     \"password\": \"asdf1234\",\r\n//     \"profilePhoto\": \"imagebb.com\"\r\n// }\r\n{\r\n    \"name\": \"Mini\",\r\n    \"email\": \"mini@gmail.com\",\r\n    \"password\": \"asdf1234\",\r\n    \"profilePhoto\": \"imagebb.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/users/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "users",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Profile",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "// {\r\n//     \"name\": \"Ruhan\",\r\n//     \"email\": \"nahidruhan@gmail.com\",\r\n//     \"password\": \"asdf1234\",\r\n//     \"profilePhoto\": \"imagebb.com\"\r\n// }\r\n{\r\n    \"name\": \"Mini\",\r\n    \"email\": \"mini@gmail.com\",\r\n    \"password\": \"asdf1234\",\r\n    \"profilePhoto\": \"imagebb.com\"\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/users/me",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "users",
+                "me"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"kimi\",\r\n    \"email\": \"mini@gmail.com\",\r\n    \"bio\": \"cat\",\r\n    \"profilePhoto\": \"unsplash.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/users/my-profile",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "users",
+                "my-profile"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "\r\n{\r\n    \"email\": \"jabeen@gmail.com\",\r\n    \"password\": \"asdf1234\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "\r\n{\r\n    \"email\": \"mini@gmail.com\",\r\n    \"password\": \"asdf1234\"\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/auth/refresh-token",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "auth",
+                "refresh-token"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Posts",
+      "item": [
+        {
+          "name": "Create Post",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n \"title\": \"My Third Post: Premium\",\r\n \"content\": \"Content of the post goes here.\",\r\n \"thumbnail\": \"https://example.com/thumbnail.jpg\",\r\n \"isFeatured\": false,\r\n \"isPremium\": true,\r\n \"status\": \"PUBLISHED\",\r\n \"tags\": [\"premium\"]\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/posts",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "posts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Post",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/posts",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "posts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Single Post",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n \"title\": \"My Second Post\",\r\n \"content\": \"Content of the post goes here.\",\r\n \"thumbnail\": \"https://example.com/thumbnail.jpg\",\r\n \"isFeatured\": false,\r\n \"status\": \"PUBLISHED\",\r\n \"tags\": [\"typescript\", \"prisma\", \"express\"]\r\n}\r\n"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/posts/9ad0de12-8b5c-44ad-b67e-02e0c4cf2c2c",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "posts",
+                "9ad0de12-8b5c-44ad-b67e-02e0c4cf2c2c"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Post",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n \"title\": \"My Second Post\",\r\n \"content\": \"Content of the post goes here.\",\r\n \"thumbnail\": \"https://example.com/thumbnail.jpg\",\r\n \"isFeatured\": false,\r\n \"status\": \"PUBLISHED\",\r\n \"tags\": [\"typescript\", \"prisma\", \"express\"]\r\n}\r\n"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/posts/my-posts",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "posts",
+                "my-posts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Post",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n \"title\": \"My Second Post: Updated\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/posts/9ad0de12-8b5c-44ad-b67e-02e0c4cf2c2c",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "posts",
+                "9ad0de12-8b5c-44ad-b67e-02e0c4cf2c2c"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Post",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n \"title\": \"My Second Post\",\r\n \"content\": \"Content of the post goes here.\",\r\n \"thumbnail\": \"https://example.com/thumbnail.jpg\",\r\n \"isFeatured\": false,\r\n \"status\": \"PUBLISHED\",\r\n \"tags\": [\"typescript\", \"prisma\", \"express\"]\r\n}\r\n"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/posts/6ef5ece0-c34e-42c6-8006-e186baec8999",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "posts",
+                "6ef5ece0-c34e-42c6-8006-e186baec8999"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Stats",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n \"title\": \"My Second Post\",\r\n \"content\": \"Content of the post goes here.\",\r\n \"thumbnail\": \"https://example.com/thumbnail.jpg\",\r\n \"isFeatured\": false,\r\n \"status\": \"PUBLISHED\",\r\n \"tags\": [\"typescript\", \"prisma\", \"express\"]\r\n}\r\n"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/posts/stats",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "posts",
+                "stats"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Premium Post",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/premium",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "premium"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Comments",
+      "item": [
+        {
+          "name": "Post Comment",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"content\": \"This is second comment\",\r\n  \"postId\": \"2af35550-171b-4fc4-941a-2178e2b405a9\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/comments",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "comments"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Subscription",
+      "item": [
+        {
+          "name": "Create checkout",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"content\": \"This is second comment\",\r\n  \"postId\": \"2af35550-171b-4fc4-941a-2178e2b405a9\"\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/subscription/checkout",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "subscription",
+                "checkout"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Check Status",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"content\": \"This is second comment\",\r\n  \"postId\": \"2af35550-171b-4fc4-941a-2178e2b405a9\"\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/subscription/status",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "subscription",
+                "status"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
