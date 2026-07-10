@@ -7,13 +7,13 @@
     "dev": "tsx watch src/server.ts",
     "start": "node dist/server.js",
     "build": "tsc",
+    "postinstall": "prisma generate",
     "test": "echo \"Error: no test specified\" && exit 1",
     "stripe:webhook": "stripe listen --forward-to localhost:8000/api/subscription/webhook"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module",
   "devDependencies": {
     "@types/node": "^26.0.0",
     "@types/pg": "^8.20.0",
