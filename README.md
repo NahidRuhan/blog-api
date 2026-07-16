@@ -28,6 +28,22 @@ This project is a modular blog backend built with Express, TypeScript, Prisma, a
 - **Authentication:** JWT (JSON Web Tokens) & bcrypt for password hashing
 - **Payments:** Stripe (via webhook integration)
 
+## 📦 Dependencies
+
+The backend server relies on a Node.js ecosystem configured with TypeScript, Prisma ORM, and Express.
+
+### Core Dependencies
+- **Core Framework & Utils:** `express` (^5.2.1), `dotenv` (^17.4.2), `http-status` (^2.1.0)
+- **Database & ORM:** `@prisma/client` (^7.8.0), `@prisma/adapter-pg` (^7.8.0), `pg` (^8.22.0)
+- **Security & Middleware:** `cors` (^2.8.6), `bcryptjs` (^3.0.3), `jsonwebtoken` (^9.0.3), `cookie-parser` (^1.4.7)
+- **Payments:** `stripe` (^22.3.0)
+- **Type Definitions:** `@types/express` (^5.0.6), `@types/cors` (^2.8.19), `@types/jsonwebtoken` (^9.0.10), `@types/cookie-parser` (^1.4.10)
+
+### Development Dependencies
+- **TypeScript & Execution:** `typescript` (^6.0.3), `tsx` (^4.22.4)
+- **Database Tooling:** `prisma` (^7.8.0)
+- **Type Definitions:** `@types/node` (^26.0.0), `@types/pg` (^8.20.0)
+
 ## Project Structure
 
 ```text
